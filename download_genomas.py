@@ -29,7 +29,7 @@ def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name
         os.makedirs(download_path)
 
     # Build the command
-    command = ['./datasets', 'summary', 'genome', 'taxon', str(taxon_id)]
+    command = ['./datasets', 'summary', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference']
 
     # Add flags based on user input
     if annotated:
@@ -41,15 +41,15 @@ def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name
     print(f"Running command: {' '.join(command)}")
 
     try:
-        # Run the command
-        subprocess.run(command, check=True)
+         #Run the command
+        subprocess.run(command, check=True) 
         
-        # After the command is run, move or store the result in the download folder
+        #After the command is run, move or store the result in the download folder
         print(f"Command 'datasets summary' executed successfully for taxon {taxon_id}. The download is saved in {download_path}.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing the command: {e}")
     except FileNotFoundError:
-        print('Error: The "./datasets" file was not found. Please check if the path is correct.')
+       print('Error: The "./datasets" file was not found. Please check if the path is correct.')
 
 if __name__ == '__main__':
     run_datasets_summary()
