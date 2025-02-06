@@ -7,11 +7,12 @@ import click  # Library to create command-line commands
               help='The taxon ID to be used in the command.')
 @click.option('--reference', is_flag=True, help='Flag to indicate the use of reference.')
 @click.option('--annotated', is_flag=True, help='Flag to indicate the use of annotated data.')
+@click.option('--filename', prompt='Enter the file name .zip', help='The name to be used in your file zip')
 @click.option('--output-dir', prompt='Enter the output directory to store the download (e.g., "/path/to/output")',
               help='Directory where the download will be saved.')
 @click.option('--folder-name', prompt='Enter the folder name for the download (e.g., "download_folder")',
               help='Name of the folder where the files will be saved.')
-def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name):
+def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name, filename):
     """
     Function to run the "datasets summary" command with parameters provided via command line.
     It also asks for the folder name and location where the download will be saved.
