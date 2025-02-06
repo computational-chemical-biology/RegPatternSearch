@@ -11,6 +11,8 @@ import click  # Library to create command-line commands
               help='Directory where the download will be saved.')
 @click.option('--folder-name', prompt='Enter the folder name for the download (e.g., "download_folder")',
               help='Name of the folder where the files will be saved.')
+
+#--filename string           Specify a custom file name for the downloaded data package (default "ncbi_dataset.zip") < adicionar para fazer o download .zip
 def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name):
     """
     It asks for the folder name and location where the download will be saved.
@@ -28,7 +30,7 @@ def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name
         os.makedirs(download_path)
 
     # Build the command
-    command = ['./datasets', 'summary', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference'] #summary for test
+    command = ['./datasets', 'summary', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference'] #summary apenas para teste, vou trocar por download
 
     # Add flags based on user input
     if annotated:
