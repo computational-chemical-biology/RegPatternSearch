@@ -7,27 +7,9 @@ import click  # Library to create command-line commands
               help='The taxon ID to be used in the command.')
 @click.option('--reference', is_flag=True, help='Flag to indicate the use of reference.')
 @click.option('--annotated', is_flag=True, help='Flag to indicate the use of annotated data.')
-@click.option('--output-dir', prompt='Enter the output directory to store the download (e.g., "/path/to/output")',
-              help='Directory where the download will be saved.')
-@click.option('--folder-name', prompt='Enter the folder name for the download (e.g., "download_folder")',
-              help='Name of the folder where the files will be saved.')
 
-def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name):
-    """
-    It asks for the folder name and location where the download will be saved.
-    """
-    # Check if the output directory exists, if not, create it
-    if not os.path.exists(output_dir):
-        print(f"The folder {output_dir} does not exist. Creating the folder...")
-        os.makedirs(output_dir)
-    
-    # Create the folder inside the specified directory
-    download_path = os.path.join(output_dir, folder_name)
-    
-    if not os.path.exists(download_path):
-        print(f"The folder {download_path} does not exist. Creating the folder...")
-        os.makedirs(download_path)
-
+def run_datasets_summary(taxon_id, reference, annotated): 
+  
     # Build the command
     command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference']
     # Add flags based on user input
@@ -44,7 +26,7 @@ def run_datasets_summary(taxon_id, reference, annotated, output_dir, folder_name
         subprocess.run(command, check=True) 
         
         #After the command is run, move or store the result in the download folder
-        print(f"Command 'datasets summary' executed successfully for taxon {taxon_id}. The download is saved in {download_path}.")
+        print(f"Command 'datasets download' executed successfully for taxon {taxon_id}.")
     except subprocess.CalledProcessError as e:
         print(f"Error executing the command: {e}")
     except FileNotFoundError:
