@@ -3,7 +3,7 @@ import os  # To navigate through system directories
 import click  # Library to create command-line commands
 
 @click.command()
-@click.option('--taxon-id', prompt='Enter the taxon ID (1883)',
+@click.option('--taxon-id', prompt='Enter the taxon ID (Streptomyces: 1883)',
               help='The taxon ID to be used in the command.')
 @click.option('--reference', is_flag=True, help='Flag to indicate the use of reference.')
 @click.option('--annotated', is_flag=True, help='Flag to indicate the use of annotated data.')
@@ -23,8 +23,7 @@ def run_datasets_summary(taxon_id, reference, annotated):
 
     try:
          #Run the command
-        subprocess.run(command, check=True) 
-        
+        subprocess.run(command, check=True)
         #After the command is run, move or store the result in the download folder
         print(f"Command 'datasets download' executed successfully for taxon {taxon_id}.")
     except subprocess.CalledProcessError as e:
