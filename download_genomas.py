@@ -11,7 +11,7 @@ import click  # Library to create command-line commands
 def run_datasets_summary(taxon_id, reference, annotated): 
   
     # Build the command
-    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference']
+    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference', '--include','protein,genome,rna,cds,gff3,gtf,gbff,seq-report']
     # Add flags based on user input
     if annotated:
         command.append('--annotated')  # Ensure '--annotated' is added if the user chooses it
