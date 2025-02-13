@@ -5,19 +5,14 @@ import click  # Library to create command-line commands
 @click.command()
 @click.option('--taxon-id', prompt='Enter the taxon ID (Streptomyces: 1883)',
               help='The taxon ID to be used in the command.')
-@click.option('--reference', is_flag=True, help='Flag to indicate the use of reference.')
-@click.option('--annotated', is_flag=True, help='Flag to indicate the use of annotated data.')
 
-def run_datasets_summary(taxon_id, reference, annotated): 
+
+def run_datasets_summary(taxon_id): 
   
     # Build the command
-    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference', '--include','protein,genome,rna,cds,gff3,gtf,gbff,seq-report']
-    # Add flags based on user input
-    if annotated:
-        command.append('--annotated')  # Ensure '--annotated' is added if the user chooses it
-    if reference:
-        command.append('--reference')  # Similarly, add '--reference' if needed
-    
+    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference' , '--include','rna,genome']
+    #Options to the command '--include','protein,genome,rna,cds,gff3,gtf,gbff,seq-report']
+   
     # Print the command for debugging purposes
     print(f"Running command: {' '.join(command)}")
 
