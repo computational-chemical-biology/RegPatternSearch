@@ -10,7 +10,7 @@ import click  # Library to create command-line commands
 def run_datasets_summary(taxon_id): 
   
     # Build the command
-    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference' , '--include','rna,genome']
+    command = ['./datasets', 'download', 'genome', 'taxon', str(taxon_id), '--annotated', '--reference' , '--include','genome,rna,protein,gff3']
     #Options to the command '--include','protein,genome,rna,cds,gff3,gtf,gbff,seq-report']
    
     # Print the command for debugging purposes
