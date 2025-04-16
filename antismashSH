@@ -1,0 +1,11 @@
+#!/bin/bash -f
+#SBATCH --job-name=antismash_loop
+#SBATCH --output=logs/antismash_%j.out
+#SBATCH --error=logs/antismash_%j.err
+#SBATCH --time=12:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+
+conda activate
+mkdir -p /temporario2/9877294/Resultados_AntiSMASH && for file in /temporario2/9877294/extracted_gbff/*.gbff; do dir_name=$(basename "$file" .gbff); output_dir="/temporario2/9877294/Resultados_AntiSMASH/${dir_name}_antismash"; antismash --genefinding-tool prodigal "$file" --
+output-dir "$output_dir"; done
