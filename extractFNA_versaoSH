@@ -2,7 +2,7 @@
 #!/bin/bash
 
 # Caminho de origem com  expandido para o diretório home do usuário
-source_directory="$HOME/documents/RegPatternSearch/genomas_baixados/ncbi_dataset/data"
+source_directory="$HOME/temporario2/9877294/ncbi_dataset/data"
 
 # Diretório de destino para onde os arquivos .fna serão copiados
 target_directory="./extracted_fna"
