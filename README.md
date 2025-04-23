@@ -20,6 +20,7 @@ Este repositório reúne scripts, dados e documentação relacionados à anális
 - NCBI Dataset
 - Prokka
 - AntiSMASH
+- NextFlow
 
 
 ---
