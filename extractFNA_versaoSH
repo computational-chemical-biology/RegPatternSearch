@@ -1,0 +1,16 @@
+#teste para rodar em formato shell .sh
+#!/bin/bash
+
+# Caminho de origem com  expandido para o diretório home do usuário
+source_directory="$HOME/temporario2/9877294/ncbi_dataset/data"
+
+# Diretório de destino para onde os arquivos .fna serão copiados
+target_directory="./extracted_fna"
+
+# Cria o diretório de destino se não existir
+mkdir -p "$target_directory"
+
+# Comando find para procurar arquivos .fna e copiá-los para o diretório de destino
+find "$source_directory" -type f -name "*.fna" -exec cp {} "$target_directory" \;
+
+echo "Arquivos .fna extraídos para $target_directory"

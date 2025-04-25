@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Caminho de origem com $HOME expandido
+source_directory="$HOME/documents/RegPatternSearch/ncbi_dataset/data"
+
+# Diretório de destino para onde os arquivos .gbff serão copiados
+target_directory="./extracted_gbff"
+
+# Cria o diretório de destino se não existir
+mkdir -p "$target_directory"
+
+# Encontra todos os arquivos .gbff e os copia com renomeação
+find "$source_directory" -type f -name "*.gbff" | while read filepath; do
+    # Obtém o nome da pasta pai do arquivo
+    parent_dir_name=$(basename "$(dirname "$filepath")")
+    
+    # Novo nome do arquivo com base na pasta pai
+    new_filename="${parent_dir_name}_$(basename "$filepath")"
+    
+    # Copia e renomeia o arquivo
+    cp "$filepath" "$target_directory/$new_filename"
+done
+
+echo "Arquivos .gbff extraídos e renomeados em $target_directory"
