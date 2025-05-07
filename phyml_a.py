@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 def convert_fasta_to_phylip(fasta_path, phylip_path):
-    """Converte um alinhamento de FASTA para PHYLIP."""
-    alignment = AlignIO.read(fasta_path, "fasta")
-    AlignIO.write(alignment, phylip_path, "phylip")
+    """Converte um alinhamento de FASTA para PHYLIP-relaxed."""
+    # Lê o arquivo FASTA e converte para PHYLIP-relaxed
+    alignment = AlignIO.read(fasta_path, "fasta-pearson")  # ou "fasta-blast"
+    AlignIO.write(alignment, phylip_path, "phylip-relaxed")  # Usando 'phylip-relaxed' para nomes maiores
 
 def run_phyml(phylip_path):
     """Executa o PhyML no arquivo PHYLIP especificado."""
@@ -41,3 +42,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
