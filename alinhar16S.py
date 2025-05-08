@@ -61,3 +61,4 @@ def main():
 # Garantir que o código dentro de main() seja executado apenas quando o script for rodado diretamente
 if __name__ == "__main__":
     main()
+

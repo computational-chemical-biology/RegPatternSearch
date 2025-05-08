@@ -7,6 +7,13 @@
 #SBATCH --output=nextflow_%j.out 
 #SBATCH --error=nextflow_%j.err
 
+# Ativa o Conda
+source /temporario2/9877294/anaconda3/etc/profile.d/conda.sh
+conda activate
 
-module load nextflow
-nextflow run main.nf -resume
+# Executa a pipeline Nextflow
+nextflow run pnextflow.nf -resume \
+    -with-report report.html \
+    -with-trace trace.txt \
+    -with-timeline timeline.html \
+    -with-dag dag.png
