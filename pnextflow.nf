@@ -1,12 +1,12 @@
 #!/usr/bin/
 
 // Definindo os parâmetros de entrada e saída
-params.base_dir = '/temporario2/9877294/ncbi_dataset/data'
+params.base_dir = '/temporario2/9877294/extracted_gbff'
 params.output_base = '/temporario2/9877294/Resultados_AntiSMASH'
 
 // Definindo o canal que busca todos os arquivos genomic.gbff em subdiretórios
 Channel
-    .fromPath("${params.base_dir}/**/genomic.gbff")
+    .fromPath("${params.base_dir}/**/*_genomic.gbff")
     .set { arquivos }
 
 // Definindo o processo para rodar o antiSMASH
