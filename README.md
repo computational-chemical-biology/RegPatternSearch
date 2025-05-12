@@ -1,32 +1,30 @@
-# 🧬 Detecção de Padrões em Elementos Regulatórios de Agrupamentos Gênicos Biossintéticos para Espécies do Gênero *Streptomyces*
+# 🧬 Pattern Detection in Regulatory Elements of Biosynthetic Gene Clusters in *Streptomyces* Species
 
-## 🧭 Objetivo 
+## 🧭 Objective
 
-Executar um estudo abrangente dos mecanismos de regulação de agrupamentos gênicos biossintéticos (BGCs) em espécies do gênero *Streptomyces*.
-
----
-
-## 📁 Sobre o Repositório
-
-Este repositório reúne scripts, dados e documentação relacionados à análise e predição de fatores regulatórios envolvidos na expressão de BGCs em *Streptomyces*. 
+Conduct a comprehensive study of the regulatory mechanisms of biosynthetic gene clusters (BGCs) in *Streptomyces* species.
 
 ---
 
-## 🛠️ Tecnologias e Ferramentas Utilizadas
+## 📁 About the Repository
 
-- Python
-- Bash
-- Conda (para gerenciamento de ambientes e ferramentas bioinformáticas)
-- NCBI Dataset
-- Prokka
-- AntiSMASH
+This repository contains scripts, data, and documentation related to the analysis and prediction of regulatory factors involved in the expression of BGCs in *Streptomyces*.
+
+---
+
+## 🛠️ Technologies and Tools Used
+
+- Python  
+- Bash  
+- Conda (for environment and bioinformatics tool management)  
+- NCBI Dataset  
+- Prokka  
+- PhyML  
+- AntiSMASH  
 - NextFlow
 
-
 ---
 
-## 🚀 Instruções (em desenvolvimento)
+## 🚀 Instructions (under development)
 
-> ⚠️ Em breve: instruções para execução do pipeline completo, incluindo pré-requisitos e exemplos de entrada/saída.
-
----
+> ⚠️ Coming soon: instructions for running the complete pipeline, including prerequisites and input/output examples.
