@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -f
 #SBATCH --job-name=antismash_nextflow
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=20
@@ -17,3 +17,14 @@ nextflow run pnextflow.nf -resume \
     -with-trace trace.txt \
     -with-timeline timeline.html \
     -with-dag dag.png
+
+# Criar pasta de logs, se necessário
+mkdir -p logs
+
+# Rodar o pipeline Nextflow
+nextflow run pnextflow.nf -resume \
+  -with-report report.html \
+  -with-trace trace.txt \
+  -with-timeline timeline.html \
+  -with-dag flowchart.png
+
