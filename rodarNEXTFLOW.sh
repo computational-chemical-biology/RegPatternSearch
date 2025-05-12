@@ -21,10 +21,3 @@ nextflow run pnextflow.nf -resume \
 # Criar pasta de logs, se necessário
 mkdir -p logs
 
-# Rodar o pipeline Nextflow
-nextflow run pnextflow.nf -resume \
-  -with-report report.html \
-  -with-trace trace.txt \
-  -with-timeline timeline.html \
-  -with-dag flowchart.png
-
