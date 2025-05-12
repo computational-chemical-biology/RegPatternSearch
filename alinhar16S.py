@@ -4,61 +4,58 @@ from Bio import SeqIO
 
 def concatenate_fasta(fasta_dir, output_fasta):
     """
-    Função para concatenar arquivos FASTA em um único arquivo.
-    - Abre e lê todos os arquivos .fasta no diretório fornecido.
-    - Escreve as sequências em um arquivo de saída único.
+     Function to concatenate multiple FASTA files into a single file.
     """
-    # Lista todos os arquivos FASTA no diretório
+    # List all FASTA files in the directory
     fasta_files = [os.path.join(fasta_dir, filename) for filename in os.listdir(fasta_dir) if filename.endswith('.fasta')]
 
-    # Abre o arquivo de saída para escrever as sequências concatenadas
+    # Open the output file to write the concatenated sequences
     with open(output_fasta, "w") as output_file:
         for fasta_file in fasta_files:
-            # Abre cada arquivo FASTA individualmente
+            # Open each individual FASTA file
             with open(fasta_file, "r") as input_file:
-                # Escreve o conteúdo do arquivo FASTA no arquivo de saída
+                # Write the contents of each FASTA file to the output file
                 output_file.write(input_file.read())
 
-    # Mensagem de confirmação após gerar o arquivo concatenado
-    print(f"Arquivo concatenado gerado: {output_fasta}")
+    # Confirmation message after the concatenated file is created
+    print(f"Concatenated file generated: {output_fasta}")
 
 def align_sequences_with_mafft(input_fasta, output_fasta):
     """
-    Função para alinhar sequências usando o MAFFT.
-    - Chama o MAFFT através da linha de comando.
-    - Gera um arquivo de saída com as sequências alinhadas.
+    Function to align sequences using MAFFT.
+    - Calls MAFFT via command line.
+    - Produces an output file with the aligned sequences.
     """
-    # Comando para rodar o MAFFT usando a opção --auto, que ajusta automaticamente os parâmetros do alinhamento
+    # Command to run MAFFT with the --auto option, which automatically selects parameters
     mafft_command = f"mafft --auto {input_fasta} > {output_fasta}"
     
-    # Executa o comando MAFFT via subprocess
+    # Execute the MAFFT command using subprocess
     subprocess.run(mafft_command, shell=True, check=True)
     
-    # Mensagem de confirmação após gerar o arquivo alinhado
-    print(f"Sequências alinhadas geradas: {output_fasta}")
+    # Confirmation message after the aligned file is created
+    print(f"Aligned sequences generated: {output_fasta}")
 
 def main():
     """
-    Função principal que coordena a execução do processo:
-    - Concatenar arquivos FASTA.
-    - Alinhar as sequências com MAFFT.
+    Main function that coordinates the workflow:
+    - Concatenates FASTA files.
+    - Aligns the sequences using MAFFT.
     """
-    # Caminho para o diretório onde os arquivos FASTA estão armazenados
+    # Path to the directory containing the FASTA files
     fasta_dir = "/home/barbara/documents/RegPatternSearch/16S_resultados"
 
-    # Caminho para o arquivo de saída que vai armazenar todas as sequências concatenadas
+    # Path to the output file that will store all concatenated sequences
     concatenated_fasta = "/home/barbara/documents/RegPatternSearch/all_sequences.fasta"
     
-    # Caminho para o arquivo de saída onde as sequências alinhadas serão salvas
+    # Path to the output file that will store the aligned sequences
     aligned_fasta = "/home/barbara/documents/RegPatternSearch/aligned_sequences.fasta"
 
-    # Passo 1: Concatenar as sequências de todos os arquivos FASTA no diretório
+    # Step 1: Concatenate sequences from all FASTA files in the directory
     concatenate_fasta(fasta_dir, concatenated_fasta)
 
-    # Passo 2: Alinhar as sequências concatenadas usando o MAFFT
+    # Step 2: Align the concatenated sequences using MAFFT
     align_sequences_with_mafft(concatenated_fasta, aligned_fasta)
 
-# Garantir que o código dentro de main() seja executado apenas quando o script for rodado diretamente
+# Ensure that main() is executed only when the script is run directly
 if __name__ == "__main__":
     main()
-
