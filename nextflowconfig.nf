@@ -1,4 +1,4 @@
-params.outdir = 'resultadosAS'
+params.outdir = 'resultados_AS'
 
 process {
     executor = 'slurm'
