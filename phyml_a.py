@@ -4,41 +4,38 @@ import matplotlib.pyplot as plt
 import os
 
 def convert_fasta_to_phylip(fasta_path, phylip_path):
-    """Converte um alinhamento de FASTA para PHYLIP-relaxed."""
-    # Lê o arquivo FASTA e converte para PHYLIP-relaxed
-    alignment = AlignIO.read(fasta_path, "fasta-pearson")  # ou "fasta-blast"
-    AlignIO.write(alignment, phylip_path, "phylip-relaxed")  # Usando 'phylip-relaxed' para nomes maiores
+    """Convert alignment from FASTA to PHYLIP-relaxed format."""
+    alignment = AlignIO.read(fasta_path, "fasta-pearson")
+    AlignIO.write(alignment, phylip_path, "phylip-relaxed")
 
 def run_phyml(phylip_path):
-    """Executa o PhyML no arquivo PHYLIP especificado."""
+    """Run PhyML on the PHYLIP file with 100 bootstraps."""
     cmd = ["phyml", "-i", phylip_path, "-d", "nt", "-b", "100"]
     subprocess.run(cmd, check=True)
 
 def visualize_tree(tree_file):
-    """Visualiza a árvore filogenética usando Biopython e Matplotlib."""
+    """Display phylogenetic tree using Biopython and Matplotlib."""
     tree = Phylo.read(tree_file, "newick")
     Phylo.draw(tree)
 
 def main():
-    # Caminhos
+    """Main workflow: convert, run PhyML, and visualize tree."""
     fasta_path = "/home/barbara/documents/RegPatternSearch/aligned_sequences.fasta"
     phylip_path = "/home/barbara/documents/RegPatternSearch/aligned_sequences.phy"
     
-    # Etapas do processo
-    print("Convertendo arquivo FASTA para PHYLIP...")
+    print("Converting to PHYLIP...")
     convert_fasta_to_phylip(fasta_path, phylip_path)
 
-    print("Executando PhyML...")
+    print("Running PhyML...")
     run_phyml(phylip_path)
 
-    # Nome padrão do arquivo de saída gerado pelo PhyML
     tree_file = phylip_path + "_phyml_tree.txt"
 
     if os.path.exists(tree_file):
-        print("Visualizando a árvore filogenética...")
+        print("Displaying tree...")
         visualize_tree(tree_file)
     else:
-        print(f"Arquivo de árvore não encontrado: {tree_file}")
+        print(f"Tree file not found: {tree_file}")
 
 if __name__ == "__main__":
     main()
