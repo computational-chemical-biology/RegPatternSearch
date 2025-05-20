@@ -1,38 +1,35 @@
-#!/usr/bin/
+nextflow.enable.dsl = 2
 
-// Definindo os parâmetros de entrada e saída
 params.base_dir = '/temporario2/9877294/extracted_gbff'
 params.output_base = '/temporario2/9877294/Resultados_AntiSMASH'
 
-// Definindo o canal que busca todos os arquivos genomic.gbff em subdiretórios
-Channel
-    .fromPath("${params.base_dir}/*_genomic.gbff")
-    .set { arquivos }
+workflow {
 
-// Definindo o processo para rodar o antiSMASH
+    arquivos_ch = Channel
+        .fromPath("${params.base_dir}/*_genomic.gbff")
+        .map { arquivo -> 
+            tuple(arquivo.getBaseName().replace('_genomic.gbff', ''), arquivo)
+        }
+        .take(6)
+
+    runAntismash(arquivos_ch)
+}
+
 process runAntismash {
+
+    tag { genoma_name }
+
     input:
-    path arquivo from arquivos
+    tuple val(genoma_name), path(arquivo)
 
     output:
-    path "${genoma_name}_antismash" // Resultados serão salvos em um diretório baseado no nome do genoma
+    path "${genoma_name}_antismash", dir: true, emit: antismash_out
+
+    publishDir "${params.output_base}", mode: 'copy'
 
     script:
     """
-    genome_dir = arquivo.toString().tokenize('/')[-2] // Extrai o nome do diretório pai (genoma)
-    genoma_name = genome_dir // Define o nome do genoma
-
-    mkdir -p ${genoma_name}_antismash // Cria o diretório de saída para armazenar os resultados
-
-    antismash --genefinding-tool prodigal \\
-              --relaxed \\
-              "$arquivo" \\
-              --output-dir ${genoma_name}_antismash // Executa o antiSMASH para cada genoma
+    mkdir -p ${genoma_name}_antismash
+    antismash --genefinding-tool prodigal "$arquivo" --output-dir ${genoma_name}_antismash
     """
-}
-
-// Definindo o workflow que orquestra o processo
-workflow {
-    // Chamando o processo para rodar o antiSMASH nos arquivos encontrados
-    runAntismash()
 }
