@@ -1,6 +1,7 @@
 import json
 import re
 from collections import Counter
+import matplotlib.pyplot as plt  # Import for plotting
 
 #Path to the JSON file
 arquivo = "/home/barbara/documents/RegPatternSearch/resumo.json"
@@ -31,8 +32,9 @@ for registro in dados.get("reports", []):
         contador_especies[especie] += 1
 
 #Print the five most frequent species
+top5 = contador_especies.most_common(5)
 print("\nTop 5 most frequent species:")
-for especie, contagem in contador_especies.most_common(5):
+for especie, contagem in top5:
     print(f"{especie}: {contagem}")
 
 #Specific count for a known species - only for test
@@ -41,3 +43,19 @@ print(f"\nCount of 'Streptomyces microflavus': {contador_especies.get('Streptomy
 
 #Total number of genomes analyzed
 print(f"\nTotal number of genomes analyzed: {sum(contador_especies.values())}")
+
+#Create a bar chart of the top 5 most frequent species
+especies = [item[0] for item in top5]
+contagens = [item[1] for item in top5]
+
+plt.figure(figsize=(10, 6))
+plt.bar(especies, contagens, color='skyblue')
+plt.title('Top 5 Most Frequent Streptomyces Species')
+plt.xlabel('Species')
+plt.ylabel('Count')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+
+#Save the figure and show it
+plt.savefig("top5_species_barplot.png")  # Saves the plot as a PNG file
+plt.show()  # Displays the plot interactively
